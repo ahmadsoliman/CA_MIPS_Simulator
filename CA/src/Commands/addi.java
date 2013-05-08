@@ -3,7 +3,7 @@ package Commands;
 import DatapathComponents.ALU;
 import DatapathComponents.Register;
 
-public abstract class addi extends IFormatCommand {
+public class addi extends IFormatCommand {
 	int sum;
 
 	public addi(Register des, Register s1, int s2) {

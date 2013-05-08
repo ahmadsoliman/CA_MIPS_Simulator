@@ -13,7 +13,7 @@ public class Memory {
 		mem.set(index, value);
 	}
 	
-	public void getValue(int index) {
-		mem.get(index);
+	public int getValue(int index) {
+		return mem.get(index);
 	}
 }
