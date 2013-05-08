@@ -3,7 +3,7 @@ package Commands;
 import DatapathComponents.ALU;
 import DatapathComponents.Register;
 
-public abstract class sub extends RFormatCommand{
+public class sub extends RFormatCommand{
 	int sub;
 
 	public sub(Register t0, Register s1, Register s2) {
@@ -12,4 +12,11 @@ public abstract class sub extends RFormatCommand{
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
 	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

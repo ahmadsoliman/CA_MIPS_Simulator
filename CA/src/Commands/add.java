@@ -3,7 +3,7 @@ package Commands;
 import DatapathComponents.ALU;
 import DatapathComponents.Register;
 
-public abstract class add extends RFormatCommand {
+public class add extends RFormatCommand {
 	int sum;
 
 	public add(Register t0, Register s1, Register s2) {
@@ -11,5 +11,11 @@ public abstract class add extends RFormatCommand {
 		t0.setValue(sum);
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
+	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
 	}
 }

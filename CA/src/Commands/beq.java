@@ -4,7 +4,7 @@ import DatapathComponents.ALU;
 import DatapathComponents.Label;
 import DatapathComponents.Register;
 
-public abstract class beq extends IFormatCommand {
+public class beq extends IFormatCommand {
 	int sub;
 
 	public beq(Register rs, Register rt, Label L1) {
@@ -16,4 +16,11 @@ public abstract class beq extends IFormatCommand {
 			// ALUsrc, branch, ALUop
 		}
 	}
+
+	@Override
+	public void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
