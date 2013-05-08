@@ -1,10 +1,15 @@
 package DatapathComponents;
 
 public class Register {
+	String name;
 	int value;
 
 	public Register(int value) {
-		super();
+		this.value = value;
+	}
+	
+	public Register(String name, int value) {
+		this.name = name;
 		this.value = value;
 	}
 
