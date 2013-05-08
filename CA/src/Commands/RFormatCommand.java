@@ -1,5 +1,7 @@
 package Commands;
 
-public abstract class RFormatCommand extends IRFormatCommand{
+import DatapathComponents.Register;
 
+public abstract class RFormatCommand extends IRFormatCommand{
+	Register source2;
 }

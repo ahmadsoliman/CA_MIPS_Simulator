@@ -19,7 +19,7 @@ public class Simulator {
 		StringTokenizer strT;
 		String opcode, st, rt , dt;
 		
-		CPU cpu = new CPU();
+		
 		
 		while(true) {
 			strT = new StringTokenizer(br.readLine());
