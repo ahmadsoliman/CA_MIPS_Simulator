@@ -11,6 +11,9 @@ public abstract class beq extends IFormatCommand {
 		sub = ALU.subtract(rs.getValue(), rt.getValue());
 		if (sub == 0) {
 			// branch to L1
+			// PC to L1.index
+			// controls:
+			// ALUsrc, branch, ALUop
 		}
 	}
 }
