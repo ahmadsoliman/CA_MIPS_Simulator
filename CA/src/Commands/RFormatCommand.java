@@ -6,6 +6,7 @@ import DatapathComponents.RegisterFile;
 
 public abstract class RFormatCommand extends IRFormatCommand {
 	Register source2;
+	int shamt;
 
 	public static Register[] prepareCommand(String dt, String st, String rt) {
 		if (!(st.matches("\\$..") || rt.matches("\\$..") || dt.matches("\\$.."))) {

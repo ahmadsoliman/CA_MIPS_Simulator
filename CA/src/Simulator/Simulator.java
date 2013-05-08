@@ -1,5 +1,5 @@
 package Simulator;
-
+		
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,9 +26,8 @@ public class Simulator {
 
 		StringTokenizer strT;
 		String opcode, st, rt , dt;
-		
 		CPU cpu = CPU.getCPU();
-		
+
 		while(true) {
 			strT = new StringTokenizer(br.readLine());
 

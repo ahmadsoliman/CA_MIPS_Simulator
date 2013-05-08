@@ -33,4 +33,12 @@ public class ALU {
 		return ~(r1 | r2);
 	}
 
+	public static int andi(int r1, int r2) {
+		return (r1 & r2);
+	}
+
+	public static int ori(int r1, int r2) {
+		return (r1 | r2);
+	}
+
 }
