@@ -1,7 +1,7 @@
 package Commands;
 
-import DatapathComponents.Register;
+import DatapathComponents.Label;
 
 public abstract class JFormatCommand implements Command{
-	Register destination;
+	Label destination;
 }

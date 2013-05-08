@@ -1,6 +1,8 @@
 package DatapathComponents;
 
 import java.util.ArrayList;
+import java.util.Stack;
+
 import Commands.Command;
 
 public class CPU {
@@ -18,15 +20,25 @@ public class CPU {
 	private Memory memFile;
 	private ArrayList<Command> commands;
 	private LabelFile labelFile;
+	private Stack<Integer> branchingStack;
 
 	private CPU() {
 		PC = new Register(0);
 		regFile = new RegisterFile();
 		memFile = new Memory();
 		commands = new ArrayList<Command>();
-		setLabelFile(new LabelFile());
+		labelFile = new LabelFile();
+		branchingStack = new Stack<Integer>();
 
 		// TODO Auto-generated constructor stub
+	}
+
+	public Stack getBranchingStack() {
+		return branchingStack;
+	}
+
+	public void setBranchingStack(Stack branchingStack) {
+		this.branchingStack = branchingStack;
 	}
 
 	public Register getPC() {
@@ -68,5 +80,4 @@ public class CPU {
 	public void setLabelFile(LabelFile labelFile) {
 		this.labelFile = labelFile;
 	}
-	
 }

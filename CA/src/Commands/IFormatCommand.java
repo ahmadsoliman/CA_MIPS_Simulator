@@ -5,6 +5,8 @@ import DatapathComponents.Register;
 import DatapathComponents.RegisterFile;
 
 public abstract class IFormatCommand extends IRFormatCommand{
+	int source2;
+
 	public static Register[] prepareCommand(String dt, String st) {
 		if (!(st.matches("\\$..") || dt.matches("\\$.."))) {
 			return null;

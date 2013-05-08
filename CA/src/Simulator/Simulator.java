@@ -25,11 +25,11 @@ public class Simulator {
 				.println("Please Enter your code here(Enter an empty line to end):");
 
 		StringTokenizer strT;
-		String opcode, st, rt, dt;
-
+		String opcode, st, rt , dt;
+		
 		CPU cpu = CPU.getCPU();
-
-		while (true) {
+		
+		while(true) {
 			strT = new StringTokenizer(br.readLine());
 
 			if (!strT.hasMoreTokens()) {

@@ -1,15 +1,15 @@
 package Utilities;
 
+import java.math.BigInteger;
+
 public class BinaryUtilities {
 	
 	public static int convertBinaryToDecimal(String binary){
-		
-		return 0;
+		return new BigInteger(binary, 2).intValue();
 	}
 	
 	public static String convertDecimalToBinary(int decimal){
-		
-		return "";
+		return Integer.toBinaryString(decimal);
 	}
 
 }
