@@ -1,6 +1,7 @@
 package Commands;
 
 import DatapathComponents.ALU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class addi extends IFormatCommand {
@@ -17,6 +18,10 @@ public class addi extends IFormatCommand {
 		destination.setValue(sum);
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
+		ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("ALUsrc", 0);
+		ControlFile.setControl("RegWrite", 1);
+		//ControlFile.setControl("ALUop", 0010);
 	}
 	
 }

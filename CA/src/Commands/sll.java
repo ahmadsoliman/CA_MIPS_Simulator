@@ -1,5 +1,6 @@
 package Commands;
 
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class sll extends RFormatCommand {
@@ -16,5 +17,6 @@ public class sll extends RFormatCommand {
     	val1=source1.getValue();
     	result= val1 << shamt;   	
     	destination.setValue(result);
+    	ControlFile.setControl("MemWrite", 1);
     }
 }

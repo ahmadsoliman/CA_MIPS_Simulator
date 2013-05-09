@@ -1,6 +1,7 @@
 package Commands;
 
 import DatapathComponents.ALU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class ori extends IFormatCommand {
@@ -15,5 +16,9 @@ public class ori extends IFormatCommand {
     public void execute(){
     	result=ALU.ori(source1.getValue(), source2);
     	destination.setValue(result);
+    	ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("ALUsrc", 0);
+		ControlFile.setControl("RegWrite", 1);
+		//ControlFile.setControl("ALUop", 0001);
     }
 }
