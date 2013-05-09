@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 import Commands.*;
 import DatapathComponents.CPU;
+import DatapathComponents.Label;
 import DatapathComponents.Register;
 
 public class Simulator {
@@ -17,10 +18,10 @@ public class Simulator {
 		CPU cpu = CPU.getCPU();
 
 		System.out.println("Welcome to MIPS Simulator!");
-		System.out
-				.println("Please enter the memory address for code to start from:");
 		while (true) {
 			try {
+				System.out
+						.println("Please enter the memory address for code to start from:");
 				cpu.setMemStart(Integer.parseInt(br.readLine()));
 				break;
 			} catch (Exception e) {
@@ -31,11 +32,23 @@ public class Simulator {
 				.println("Please enter your code here(Enter an empty line to end):");
 
 		while (true) {
-			strT = new StringTokenizer(br.readLine().replace(',', ' '));
-			if (!strT.hasMoreTokens()) {
-				break;
+			String in = br.readLine();
+			if (in.contains(":")) {
+				String[] comps = in.split(":");
+				cpu.getLabelFile().setLabel(comps[0],
+						new Label(comps[0], cpu.getAddress()));
+				strT = new StringTokenizer(comps[1].replace(',', ' '));
+				if (!strT.hasMoreTokens()) {
+					continue;
+				}
+				readCommand(strT, cpu);
+			} else {
+				strT = new StringTokenizer(in.replace(',', ' '));
+				if (!strT.hasMoreTokens()) {
+					break;
+				}
+				readCommand(strT, cpu);
 			}
-			readCommand(strT, cpu);
 		}
 
 		System.out
@@ -45,7 +58,7 @@ public class Simulator {
 			if (!strT.hasMoreTokens()) {
 				break;
 			}
-			readCommand(strT, cpu);
+			readData(strT, cpu);
 		}
 
 		String ans;
@@ -61,18 +74,20 @@ public class Simulator {
 
 			}
 		}
-		if (ans.equals("1")) {
-			for (int i = 0; i < cpu.getCommands().size(); i++) {
-				cpu.getCommands().get(i).execute();
+		for (int i = 0; i < cpu.getCommands().size()
+				|| cpu.getPC().getValue() < cpu.getAddress(); i++) {
+			cpu.getCurCommand().execute();
+			cpu.incrementPC();
+			if (ans.equals("1")) {
 				cpu.print();
 				br.readLine();
 			}
-		} else if (ans.equals("2")) {
-			for (int i = 0; i < cpu.getCommands().size(); i++) {
-				cpu.getCommands().get(i).execute();
-			}
 		}
 		cpu.print();
+	}
+
+	private static void readData(StringTokenizer strT, CPU cpu) {
+		
 	}
 
 	private static void readCommand(StringTokenizer strT, CPU cpu) {
@@ -260,12 +275,14 @@ public class Simulator {
 			try {
 				dt = strT.nextToken();
 				st = strT.nextToken();
+
 				Register[] regs = RFormatCommand.prepareMemoryCommand(dt, st);
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new lw(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -277,8 +294,9 @@ public class Simulator {
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new lh(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -291,7 +309,8 @@ public class Simulator {
 					return;
 
 				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+						new lhu(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -303,8 +322,9 @@ public class Simulator {
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new lb(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -317,7 +337,8 @@ public class Simulator {
 					return;
 
 				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+						new lbu(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -329,8 +350,9 @@ public class Simulator {
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new sw(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -342,8 +364,9 @@ public class Simulator {
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new sh(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -355,8 +378,9 @@ public class Simulator {
 				if (regs == null)
 					return;
 
-				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+				cpu.getCommands()
+						.add(new sb(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -369,7 +393,8 @@ public class Simulator {
 					return;
 
 				cpu.getCommands().add(
-						new beq(regs[0], regs[1]/* +regs[2] */, null));
+						new lui(regs[0], regs[1].getValue()
+								+ regs[2].getValue()));
 			} catch (Exception e) {
 
 			}
@@ -382,3 +407,8 @@ public class Simulator {
 		cpu.setAddress(cpu.getAddress() + 1);
 	}
 }
+
+/*
+ * addi $t0, $zero, 5 add $t0, $t0, $t0 loop: addi $t0, $t0, -1 bne $t0, $zero,
+ * loop addi $t0 , $t0, 1
+ */

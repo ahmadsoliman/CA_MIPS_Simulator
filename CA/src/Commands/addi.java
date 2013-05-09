@@ -4,7 +4,6 @@ import DatapathComponents.ALU;
 import DatapathComponents.Register;
 
 public class addi extends IFormatCommand {
-	int sum;
 
 	public addi(Register des, Register s1, int s2) {
 		destination=des;
@@ -13,7 +12,7 @@ public class addi extends IFormatCommand {
 	}
 
 	public void execute() {
-		sum = ALU.add(source1.getValue(), source2);
+		int sum = ALU.add(source1.getValue(), source2);
 		destination.setValue(sum);
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop

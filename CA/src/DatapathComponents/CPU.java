@@ -25,21 +25,23 @@ public class CPU {
 	private int curMemAddress;
 	
 	private CPU() {
-		PC = new Register(0);
+		PC = new Register("PC", 0);
 		regFile = new RegisterFile();
 		memFile = new Memory();
 		commands = new ArrayList<Command>();
 		labelFile = new LabelFile();
 		branchingStack = new Stack<Integer>();
-
-		// TODO Auto-generated constructor stub
+	}
+	
+	public void incrementPC() {
+		PC.setValue(PC.getValue()+1);
 	}
 
-	public Stack getBranchingStack() {
+	public Stack<Integer> getBranchingStack() {
 		return branchingStack;
 	}
 
-	public void setBranchingStack(Stack branchingStack) {
+	public void setBranchingStack(Stack<Integer> branchingStack) {
 		this.branchingStack = branchingStack;
 	}
 
@@ -88,6 +90,7 @@ public class CPU {
 		System.out.println("-----------------------------------------------------------------");
 		System.out.println("Register File:");
 		regFile.print();
+		memFile.print();
 		
 	}
 
@@ -98,6 +101,7 @@ public class CPU {
 	public void setMemStart(int memStart) {
 		this.memStart = memStart;
 		setAddress(memStart);
+		PC.setValue(memStart);
 	}
 
 	public int getAddress() {
@@ -108,4 +112,12 @@ public class CPU {
 		this.curMemAddress = curMemAddress;
 	}
 	
+	public Command getCurCommand() {
+		for (int i = 0; i < commands.size(); i++) {
+			if(commands.get(i).getMemAddress()==getPC().getValue()) {
+				return commands.get(i);
+			}
+		}
+		return null;
+	}
 }
