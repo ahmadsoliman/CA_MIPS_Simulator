@@ -21,7 +21,7 @@ public class beq extends IFormatCommand {
 		if (sub == 0) {
 			// branch to L1
 			// PC to L1.index
-			CPU.getCPU().getPC().setValue(source2);
+			CPU.getCPU().getPC().setValue(source2-1);
 			// controls:
 			// ALUsrc, branch, ALUop
 			ControlFile.setControl("Branch", 1);

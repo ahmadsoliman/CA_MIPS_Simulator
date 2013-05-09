@@ -29,25 +29,38 @@ public class RegisterFile {
 	public void reset() {
 		Iterator<Register> itr = file.values().iterator();
 		while (itr.hasNext()) {
-			itr.next().value = 0;
+			itr.next().setValue(0);
 		}
 	}
-	
+
 	public Register getRegister(String name) {
 		return file.get(name);
 	}
 
 	public int getValue(String name) {
-		return file.get(name).value;
+		return file.get(name).getValue();
 	}
-	
-	public Register setRegister(String name, Register reg) {
-		return file.put(name, reg);
+
+	public void setRegister(String name, Register reg) {
+		file.put(name, reg);
 	}
-	
-	public Register setRegister(String name, int val) {
+
+	public void setRegister(String name, int val) {
 		Register reg = file.get(name);
 		reg.setValue(val);
-		return file.put(name, reg);
+		file.put(name, reg);
+	}
+
+	public void print() {
+		Iterator<Register> values = file.values().iterator();
+		Iterator<String> keys = file.keySet().iterator();
+		while (values.hasNext()) {
+			System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			System.out.println();
+		}
 	}
 }

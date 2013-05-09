@@ -21,23 +21,29 @@ public class CPU {
 	private ArrayList<Command> commands;
 	private LabelFile labelFile;
 	private Stack<Integer> branchingStack;
-
+	private DataFile dataFile;
+	private int memStart;
+	private int curMemAddress;
+	
 	private CPU() {
-		PC = new Register(0);
+		PC = new Register("PC", 0);
 		regFile = new RegisterFile();
 		memFile = new Memory();
 		commands = new ArrayList<Command>();
 		labelFile = new LabelFile();
 		branchingStack = new Stack<Integer>();
-
-		// TODO Auto-generated constructor stub
+		setDataFile(new DataFile());
+	}
+	
+	public void incrementPC() {
+		PC.setValue(PC.getValue()+1);
 	}
 
-	public Stack getBranchingStack() {
+	public Stack<Integer> getBranchingStack() {
 		return branchingStack;
 	}
 
-	public void setBranchingStack(Stack branchingStack) {
+	public void setBranchingStack(Stack<Integer> branchingStack) {
 		this.branchingStack = branchingStack;
 	}
 
@@ -84,7 +90,44 @@ public class CPU {
 	public void print() {
 		System.out.println("CPU Status:");
 		System.out.println("-----------------------------------------------------------------");
+		System.out.println("Register File:");
+		regFile.print();
+		memFile.print();
 		
 	}
+
+	public int getMemStart() {
+		return memStart;
+	}
+
+	public void setMemStart(int memStart) {
+		this.memStart = memStart;
+		setAddress(memStart);
+		PC.setValue(memStart);
+	}
+
+	public int getAddress() {
+		return curMemAddress;
+	}
+
+	public void setAddress(int curMemAddress) {
+		this.curMemAddress = curMemAddress;
+	}
 	
+	public Command getCurCommand() {
+		for (int i = 0; i < commands.size(); i++) {
+			if(commands.get(i).getMemAddress()==getPC().getValue()) {
+				return commands.get(i);
+			}
+		}
+		return null;
+	}
+
+	public DataFile getDataFile() {
+		return dataFile;
+	}
+
+	public void setDataFile(DataFile dataFile) {
+		this.dataFile = dataFile;
+	}
 }

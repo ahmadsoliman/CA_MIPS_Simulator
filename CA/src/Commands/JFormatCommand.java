@@ -2,6 +2,6 @@ package Commands;
 
 import DatapathComponents.Label;
 
-public abstract class JFormatCommand implements Command{
+public abstract class JFormatCommand extends Command{
 	Label destination;
 }
