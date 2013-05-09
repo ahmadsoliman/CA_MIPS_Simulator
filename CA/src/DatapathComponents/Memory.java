@@ -6,6 +6,7 @@ public class Memory {
 	ArrayList<Integer> mem;
 
 	public Memory() {
+		mem = new ArrayList<Integer>();
 		// TODO Auto-generated constructor stub
 	}
 

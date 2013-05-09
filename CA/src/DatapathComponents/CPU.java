@@ -15,18 +15,20 @@ public class CPU {
 		return CPUInstance;
 	}
 
-	Register PC;
-	RegisterFile regFile;
-	Memory memFile;
-	ArrayList<Command> commands;
-	Stack branchingStack;
+	private Register PC;
+	private RegisterFile regFile;
+	private Memory memFile;
+	private ArrayList<Command> commands;
+	private LabelFile labelFile;
+	private Stack<Integer> branchingStack;
 
 	private CPU() {
 		PC = new Register(0);
 		regFile = new RegisterFile();
 		memFile = new Memory();
 		commands = new ArrayList<Command>();
-		branchingStack = new Stack();
+		labelFile = new LabelFile();
+		branchingStack = new Stack<Integer>();
 
 		// TODO Auto-generated constructor stub
 	}
@@ -71,4 +73,18 @@ public class CPU {
 		this.commands = commands;
 	}
 
+	public LabelFile getLabelFile() {
+		return labelFile;
+	}
+
+	public void setLabelFile(LabelFile labelFile) {
+		this.labelFile = labelFile;
+	}
+
+	public void print() {
+		System.out.println("CPU Status:");
+		System.out.println("-----------------------------------------------------------------");
+		
+	}
+	
 }

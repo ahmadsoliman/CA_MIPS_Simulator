@@ -3,7 +3,8 @@ package Commands;
 import DatapathComponents.ALU;
 import DatapathComponents.Register;
 
-public class sub extends RFormatCommand {
+public class sub extends RFormatCommand{
+
 	int sub;
 
 	public sub(Register t0, Register s1, Register s2) {
@@ -19,4 +20,5 @@ public class sub extends RFormatCommand {
 		// RegDst, ALUsrc, RegWrite, ALUop
 
 	}
+	
 }

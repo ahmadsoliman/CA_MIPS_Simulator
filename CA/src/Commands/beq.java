@@ -25,4 +25,5 @@ public class beq extends IFormatCommand {
 			// ALUsrc, branch, ALUop
 		}
 	}
+
 }

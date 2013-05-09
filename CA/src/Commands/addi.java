@@ -18,4 +18,5 @@ public class addi extends IFormatCommand {
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
 	}
+	
 }

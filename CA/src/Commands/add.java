@@ -18,4 +18,5 @@ public class add extends RFormatCommand {
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
 	}
+
 }

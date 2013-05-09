@@ -24,4 +24,5 @@ public class bne extends IFormatCommand {
 			// ALUsrc, branch, ALUop
 		}
 	}
+
 }
