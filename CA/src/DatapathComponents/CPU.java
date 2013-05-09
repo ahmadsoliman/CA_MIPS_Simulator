@@ -21,7 +21,9 @@ public class CPU {
 	private ArrayList<Command> commands;
 	private LabelFile labelFile;
 	private Stack<Integer> branchingStack;
-
+	private int memStart;
+	private int curMemAddress;
+	
 	private CPU() {
 		PC = new Register(0);
 		regFile = new RegisterFile();
@@ -84,7 +86,26 @@ public class CPU {
 	public void print() {
 		System.out.println("CPU Status:");
 		System.out.println("-----------------------------------------------------------------");
+		System.out.println("Register File:");
+		regFile.print();
 		
+	}
+
+	public int getMemStart() {
+		return memStart;
+	}
+
+	public void setMemStart(int memStart) {
+		this.memStart = memStart;
+		setAddress(memStart);
+	}
+
+	public int getAddress() {
+		return curMemAddress;
+	}
+
+	public void setAddress(int curMemAddress) {
+		this.curMemAddress = curMemAddress;
 	}
 	
 }
