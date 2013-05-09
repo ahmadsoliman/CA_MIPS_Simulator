@@ -409,6 +409,9 @@ public class Simulator {
 }
 
 /*
- * addi $t0, $zero, 5 add $t0, $t0, $t0 loop: addi $t0, $t0, -1 bne $t0, $zero,
- * loop addi $t0 , $t0, 1
+addi $t0, $zero, 5 
+add $t0, $t0, $t0 
+loop: addi $t0, $t0, -1 
+bne $t0, $zero,loop
+addi $t0 , $t0, 1
  */

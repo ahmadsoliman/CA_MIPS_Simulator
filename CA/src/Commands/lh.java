@@ -2,6 +2,7 @@ package Commands;
 
 import Utilities.BinaryUtilities;
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 import DatapathComponents.signExtender;
 
@@ -20,5 +21,9 @@ public class lh extends RFormatCommand {
 		String extended = signExtender.extend16(halfvalue); 
 		int lastvalue = BinaryUtilities.convertBinaryToDecimal(extended);
 		destination.setValue(lastvalue);
+		ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("MemRead", 1);
+		ControlFile.setControl("MemToReg", 1);
+		ControlFile.setControl("RegWrite", 1);
 	}
 }

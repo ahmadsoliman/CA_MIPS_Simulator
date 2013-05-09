@@ -2,6 +2,7 @@ package Commands;
 
 import Utilities.BinaryUtilities;
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class sh extends RFormatCommand {
@@ -22,6 +23,6 @@ public class sh extends RFormatCommand {
 		String lastvalue = firstHalf + halfvalue;
 		int result = BinaryUtilities.convertBinaryToDecimal(lastvalue);
 		CPU.getCPU().getMemFile().setValue(address, result);
-
+		ControlFile.setControl("MemWrite", 1);
 	}
 }

@@ -2,6 +2,7 @@ package Commands;
 
 import Utilities.BinaryUtilities;
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class lhu extends RFormatCommand {
@@ -18,5 +19,9 @@ public class lhu extends RFormatCommand {
 		String halfvalue = valuebin.substring(16);
 		int lastvalue = BinaryUtilities.convertBinaryToDecimal(halfvalue);
 		destination.setValue(lastvalue);
+		ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("MemRead", 1);
+		ControlFile.setControl("MemToReg", 1);
+		ControlFile.setControl("RegWrite", 1);
 	}
 }

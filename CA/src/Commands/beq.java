@@ -2,6 +2,7 @@ package Commands;
 
 import DatapathComponents.ALU;
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Label;
 import DatapathComponents.Register;
 
@@ -23,6 +24,9 @@ public class beq extends IFormatCommand {
 			CPU.getCPU().getPC().setValue(source2-1);
 			// controls:
 			// ALUsrc, branch, ALUop
+			ControlFile.setControl("Branch", 1);
+			ControlFile.setControl("ALUsrc", 0);
+			//ControlFile.setControl("ALUop", 0110);
 		}
 	}
 

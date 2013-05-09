@@ -1,6 +1,7 @@
 package Commands;
 
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class sw extends RFormatCommand {
@@ -13,6 +14,6 @@ public class sw extends RFormatCommand {
 
 	public void execute() {
 		CPU.getCPU().getMemFile().setValue(address, destination.getValue());
-
+		ControlFile.setControl("MemWrite", 1);
 	}
 }

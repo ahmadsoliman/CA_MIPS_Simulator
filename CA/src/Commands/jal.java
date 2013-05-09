@@ -1,6 +1,7 @@
 package Commands;
 
 import DatapathComponents.CPU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Label;
 
 public class jal extends JFormatCommand {
@@ -14,5 +15,6 @@ public class jal extends JFormatCommand {
 		CPU.getCPU().getRegFile()
 				.setRegister("ra", CPU.getCPU().getPC().getValue() + 1);
 		CPU.getCPU().getPC().setValue(destination.getIndex());
+		ControlFile.setControl("Jump", 1);
 	}
 }

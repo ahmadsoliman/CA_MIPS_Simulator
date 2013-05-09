@@ -1,6 +1,7 @@
 package Commands;
 
 import DatapathComponents.ALU;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class sub extends RFormatCommand{
@@ -18,7 +19,10 @@ public class sub extends RFormatCommand{
 		destination.setValue(sub);
 		// controls:
 		// RegDst, ALUsrc, RegWrite, ALUop
-
+		ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("ALUsrc", 0);
+		ControlFile.setControl("RegWrite", 1);
+		//ControlFile.setControl("ALUop", 0110);
 	}
 	
 }

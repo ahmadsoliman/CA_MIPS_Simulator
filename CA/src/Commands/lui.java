@@ -1,6 +1,7 @@
 package Commands;
 
 import Utilities.BinaryUtilities;
+import DatapathComponents.ControlFile;
 import DatapathComponents.Register;
 
 public class lui extends IFormatCommand {
@@ -18,6 +19,8 @@ public class lui extends IFormatCommand {
 		String all = firstBin + regLast;
 		int result = BinaryUtilities.convertBinaryToDecimal(all);
 		source1.setValue(result);
+		ControlFile.setControl("RegDest", 1);
+		ControlFile.setControl("RegWrite", 1);
 	}
 
 }
