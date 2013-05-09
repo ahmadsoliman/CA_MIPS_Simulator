@@ -80,4 +80,11 @@ public class CPU {
 	public void setLabelFile(LabelFile labelFile) {
 		this.labelFile = labelFile;
 	}
+
+	public void print() {
+		System.out.println("CPU Status:");
+		System.out.println("-----------------------------------------------------------------");
+		
+	}
+	
 }
