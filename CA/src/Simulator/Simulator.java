@@ -302,7 +302,11 @@ public class Simulator {
 							new lw(regs[0], regs[1].getValue()
 									+ regs[2].getValue()));
 				} else {
-
+					// TODO datafile lw
+					Register dest = cpu.getRegFile().getRegister(
+							dt.substring(1));
+					int value = (Integer) cpu.getDataFile().getValue(st);
+					cpu.getCommands().add(new lw(dest, value));
 				}
 			} catch (Exception e) {
 
@@ -361,7 +365,7 @@ public class Simulator {
 						new lbu(regs[0], regs[1].getValue()
 								+ regs[2].getValue()));
 			} catch (Exception e) {
-				//TODO datafile lw
+
 			}
 		} else if (opcode.equals("sw")) {
 			try {
@@ -377,8 +381,13 @@ public class Simulator {
 					cpu.getCommands().add(
 							new sw(regs[0], regs[1].getValue()
 									+ regs[2].getValue()));
-				}else {
-					//TODO datafile sw
+				} else {
+					// TODO datafile sw
+					Register reg = cpu.getRegFile().getRegister(
+							dt.substring(1));
+					int value = (Integer) cpu.getDataFile().getValue(st);
+					cpu.getCommands().add(new sw(reg, value));				
+					
 				}
 			} catch (Exception e) {
 
