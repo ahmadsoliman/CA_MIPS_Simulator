@@ -24,6 +24,7 @@ public class CPU {
 	private DataFile dataFile;
 	private int memStart;
 	private int curMemAddress;
+	private ControlFile controlFile;
 	
 	private CPU() {
 		PC = new Register("PC", 0);
@@ -33,6 +34,7 @@ public class CPU {
 		labelFile = new LabelFile();
 		branchingStack = new Stack<Integer>();
 		setDataFile(new DataFile());
+		controlFile = new ControlFile();
 	}
 	
 	public void incrementPC() {
@@ -86,6 +88,15 @@ public class CPU {
 	public void setLabelFile(LabelFile labelFile) {
 		this.labelFile = labelFile;
 	}
+	
+	
+	public ControlFile getControlFile() {
+		return controlFile;
+	}
+
+	public void setControlFile(ControlFile contFile) {
+		this.controlFile = contFile;
+	}
 
 	public void print() {
 		System.out.println("CPU Status:");
@@ -93,6 +104,7 @@ public class CPU {
 		System.out.println("Register File:");
 		regFile.print();
 		memFile.print();
+		controlFile.print();
 		
 	}
 

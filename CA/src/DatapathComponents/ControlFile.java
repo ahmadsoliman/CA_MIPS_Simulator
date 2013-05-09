@@ -43,5 +43,18 @@ public class ControlFile {
 		c.setValue(val);
 		return file.put(name, c);
 	}
+	
+	public void print() {
+		Iterator<Control> values = file.values().iterator();
+		Iterator<String> keys = file.keySet().iterator();
+		while (values.hasNext()) {
+			System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			if(values.hasNext())System.out.print("$"+keys.next()+": "+values.next().getValue()+"    ");
+			System.out.println();
+		}
+	}
 
 }
