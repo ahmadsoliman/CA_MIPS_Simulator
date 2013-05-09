@@ -7,6 +7,7 @@ import java.util.StringTokenizer;
 
 import Commands.*;
 import DatapathComponents.CPU;
+import DatapathComponents.DataElem;
 import DatapathComponents.Label;
 import DatapathComponents.Register;
 
@@ -54,11 +55,10 @@ public class Simulator {
 		System.out
 				.println("Please Enter your data here(Enter an empty line to end):");
 		while (true) {
-			strT = new StringTokenizer(br.readLine());
-			if (!strT.hasMoreTokens()) {
+			String in = br.readLine();
+			if (in.equals(""))
 				break;
-			}
-			readData(strT, cpu);
+			readData(in, cpu);
 		}
 
 		String ans;
@@ -86,8 +86,24 @@ public class Simulator {
 		cpu.print();
 	}
 
-	private static void readData(StringTokenizer strT, CPU cpu) {
-		
+	private static void readData(String in, CPU cpu) {
+		String[] comps = in.split(":");
+		StringTokenizer st = new StringTokenizer(comps[1]);
+		String type = st.nextToken();
+		if (type.equals(".word")) {
+			cpu.getDataFile().setValue(comps[0],
+					new DataElem(".word", Integer.parseInt(st.nextToken())));
+		} else if (type.equals(".byte")) {
+			String[] elems = st.nextToken().split(",");
+			int[] arr = new int[elems.length];
+			for (int i = 0; i < elems.length; i++) {
+				arr[i] = Integer.parseInt(elems[i]);
+			}
+			cpu.getDataFile().setValue(comps[0], new DataElem(".byte", arr));
+		} else if (type.equals(".space")) {
+			int[] arr = new int[Integer.parseInt(st.nextToken())];
+			cpu.getDataFile().setValue(comps[0], new DataElem(".space", arr));
+		}
 	}
 
 	private static void readCommand(StringTokenizer strT, CPU cpu) {
@@ -276,13 +292,18 @@ public class Simulator {
 				dt = strT.nextToken();
 				st = strT.nextToken();
 
-				Register[] regs = RFormatCommand.prepareMemoryCommand(dt, st);
-				if (regs == null)
-					return;
+				if (st.contains("$")) {
+					Register[] regs = RFormatCommand.prepareMemoryCommand(dt,
+							st);
+					if (regs == null)
+						return;
 
-				cpu.getCommands()
-						.add(new lw(regs[0], regs[1].getValue()
-								+ regs[2].getValue()));
+					cpu.getCommands().add(
+							new lw(regs[0], regs[1].getValue()
+									+ regs[2].getValue()));
+				} else {
+
+				}
 			} catch (Exception e) {
 
 			}
@@ -340,19 +361,25 @@ public class Simulator {
 						new lbu(regs[0], regs[1].getValue()
 								+ regs[2].getValue()));
 			} catch (Exception e) {
-
+				//TODO datafile lw
 			}
 		} else if (opcode.equals("sw")) {
 			try {
 				dt = strT.nextToken();
 				st = strT.nextToken();
-				Register[] regs = RFormatCommand.prepareMemoryCommand(dt, st);
-				if (regs == null)
-					return;
+				if (st.contains("$")) {
 
-				cpu.getCommands()
-						.add(new sw(regs[0], regs[1].getValue()
-								+ regs[2].getValue()));
+					Register[] regs = RFormatCommand.prepareMemoryCommand(dt,
+							st);
+					if (regs == null)
+						return;
+
+					cpu.getCommands().add(
+							new sw(regs[0], regs[1].getValue()
+									+ regs[2].getValue()));
+				}else {
+					//TODO datafile sw
+				}
 			} catch (Exception e) {
 
 			}
@@ -409,9 +436,6 @@ public class Simulator {
 }
 
 /*
-addi $t0, $zero, 5 
-add $t0, $t0, $t0 
-loop: addi $t0, $t0, -1 
-bne $t0, $zero,loop
-addi $t0 , $t0, 1
+ * addi $t0, $zero, 5 add $t0, $t0, $t0 loop: addi $t0, $t0, -1 bne $t0,
+ * $zero,loop addi $t0 , $t0, 1
  */

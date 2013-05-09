@@ -21,6 +21,7 @@ public class CPU {
 	private ArrayList<Command> commands;
 	private LabelFile labelFile;
 	private Stack<Integer> branchingStack;
+	private DataFile dataFile;
 	private int memStart;
 	private int curMemAddress;
 	
@@ -31,6 +32,7 @@ public class CPU {
 		commands = new ArrayList<Command>();
 		labelFile = new LabelFile();
 		branchingStack = new Stack<Integer>();
+		setDataFile(new DataFile());
 	}
 	
 	public void incrementPC() {
@@ -119,5 +121,13 @@ public class CPU {
 			}
 		}
 		return null;
+	}
+
+	public DataFile getDataFile() {
+		return dataFile;
+	}
+
+	public void setDataFile(DataFile dataFile) {
+		this.dataFile = dataFile;
 	}
 }

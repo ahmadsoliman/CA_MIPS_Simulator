@@ -41,14 +41,14 @@ public class RegisterFile {
 		return file.get(name).getValue();
 	}
 
-	public Register setRegister(String name, Register reg) {
-		return file.put(name, reg);
+	public void setRegister(String name, Register reg) {
+		file.put(name, reg);
 	}
 
-	public Register setRegister(String name, int val) {
+	public void setRegister(String name, int val) {
 		Register reg = file.get(name);
 		reg.setValue(val);
-		return file.put(name, reg);
+		file.put(name, reg);
 	}
 
 	public void print() {

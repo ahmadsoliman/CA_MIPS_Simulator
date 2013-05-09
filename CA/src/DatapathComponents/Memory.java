@@ -5,10 +5,9 @@ import java.util.Iterator;
 
 public class Memory {
 	HashMap<Integer, Integer> mem;
-
+	
 	public Memory() {
 		mem = new HashMap<Integer, Integer>();
-		// TODO Auto-generated constructor stub
 	}
 
 	public void setValue(int index, int value) {
